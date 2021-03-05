@@ -1,0 +1,555 @@
+{
+	"name": "cck",
+	"label": "CCK",
+	"icon": "mdi-database-cog",
+	"description": "Content Constructor Kit",
+	"version": "1.0.0",
+	"views": [
+		{
+			"name": "install",
+			"label": "Installation",
+			"icon": "mdi-arrange-bring-to-front",
+			"description": "Installation and updating of CCK applications",
+			"view": "install"
+		},
+		{
+			"name": "apps",
+			"label": "Applications",
+			"icon": "mdi-file-tree-outline",
+			"description": "Objective relationship model",
+			"view": "apps"
+		}
+	],
+	"settings": {
+		"view": {
+			"items": {},
+			"item": {}
+		}
+	},
+	"install": {
+		"sql": "install.sql"
+	},
+	"orm": [
+		{
+			"name": "apps",
+			"description": "CCK Applications",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "ordering",
+						"description": "",
+						"type": "ordering"
+					}
+				},
+				"name": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "app",
+						"description": "Application name",
+						"type": "text"
+					}
+				},
+				"label": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "app",
+						"description": "Application name",
+						"type": "text"
+					}
+				},
+				"description": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "",
+					"view": {
+						"name": "description",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"icon": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "icon",
+						"description": "Icon name",
+						"type": "text"
+					}
+				},
+				"views": {
+					"type": "text",
+					"null": "NULL"
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"uni_name": {
+					"type": "UNIQUE",
+					"fields": ["name"]
+				}
+			}
+		},
+		{
+			"name": "entities",
+			"description": "entities",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"apps_id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "apps_id",
+						"description": "Relation to entities",
+						"type": "list"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"type": "hidden"
+					}
+				},
+				"entity": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "entity",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "",
+					"view": {
+						"name": "name",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"description": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "",
+					"view": {
+						"name": "description",
+						"description": "",
+						"type": "text"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"idx_apps_id": {
+					"fields": ["apps_id"]
+				},
+				"uni_apps_id_entity": {
+					"type": "UNIQUE",
+					"fields": ["apps_id", "entity"]
+				},
+				"fk_entities_apps_id": {
+					"type": "FOREIGN",
+					"fields": ["apps_id"],
+					"references": {
+						"entity": "apps",
+						"fields": ["id"]
+					}
+				}
+			},
+			"relations": [
+				{
+					"entity": "apps",
+					"key": "id",
+					"field": "apps_id"
+				}
+			]
+		},
+		{
+			"name": "options",
+			"description": "options of entities",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"entities_id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "entities_id",
+						"description": "Relation to entities",
+						"type": "list"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"type": "hidden"
+					}
+				},
+				"field": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "field",
+						"description": "Name of field",
+						"type": "text"
+					}
+				},
+				"type": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "type",
+						"description": "Type of field",
+						"type": "text"
+					}
+				},
+				"null": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "null",
+						"description": "Allow null value",
+						"type": "text"
+					}
+				},
+				"default": {
+					"type": "varchar(255)",
+					"null": "NULL",
+					"default": "NULL",
+					"view": {
+						"name": "default",
+						"description": "Default value of option",
+						"type": "text"
+					}
+				},
+				"auto_increment": {
+					"type": "tinyint(1)",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "auto_increment",
+						"description": "Auto increment principle",
+						"type": "text"
+					}
+				},
+				"view": {
+					"type": "text",
+					"null": "NULL",
+					"view": {
+						"name": "view",
+						"description": "View of data",
+						"type": "viewList"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"idx_entities_id": {
+					"fields": ["entities_id"]
+				},
+				"fk_options_entities_id": {
+					"type": "FOREIGN",
+					"fields": ["entities_id"],
+					"references": {
+						"entity": "entities",
+						"fields": ["id"]
+					}
+				},
+				"uni_field": {
+					"type": "UNIQUE",
+					"fields": ["entities_id", "field"]
+				}
+			},
+			"relations": [
+				{
+					"entity": "entities",
+					"key": "id",
+					"field": "entities_id"
+				}
+			]
+		},
+		{
+			"name": "relations",
+			"description": "relations of entities",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"entities_id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "entities_id",
+						"description": "Relation to entities",
+						"type": "list"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"type": "hidden"
+					}
+				},
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "name",
+						"description": "Label of relation",
+						"type": "text"
+					}
+				},
+				"description": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "description",
+						"description": "Description of relation",
+						"type": "text"
+					}
+				},
+				"entity": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "entity",
+						"description": "Entity of relation",
+						"type": "text"
+					}
+				},
+				"key": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "entity",
+						"description": "Key of relation",
+						"type": "text"
+					}
+				},
+				"field": {
+					"type": "varchar(32)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "field",
+						"description": "Field of relation",
+						"type": "text"
+					}
+				},
+				"multiple": {
+					"type": "text",
+					"null": "NULL",
+					"view": {
+						"name": "multiple",
+						"description": "Type of relation multiple",
+						"type": "multipleRelation"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"idx_entities_id": {
+					"type": "KEY",
+					"fields": ["entities_id"]
+				},
+				"fk_relations_entities_id": {
+					"type": "FOREIGN",
+					"fields": ["entities_id"],
+					"references": {
+						"entity": "entities",
+						"fields": ["id"]
+					}
+				}
+			},
+			"relations": [
+				{
+					"entity": "entities",
+					"key": "id",
+					"field": "entities_id"
+				}
+			]
+		},
+		{
+			"name": "keys",
+			"description": "keys of entities",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"entities_id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "entities_id",
+						"description": "Relation to entities",
+						"type": "list"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"type": "hidden"
+					}
+				},
+				"key": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "key",
+						"description": "Key name",
+						"type": "text"
+					}
+				},
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "name",
+						"description": "Label of key",
+						"type": "text"
+					}
+				},
+				"description": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "description",
+						"description": "Description of relation",
+						"type": "text"
+					}
+				},
+				"type": {
+					"type": "enum('STATIC', 'PRIMARY', 'UNIQUE', 'FOREIGN')",
+					"null": "NOT NULL",
+					"default": "STATIC",
+					"view": {
+						"name": "type",
+						"description": "Type of key",
+						"type": "list",
+						"options": [
+							{ "value": "PRIMARY" },
+							{ "value": "STATIC" },
+							{ "value": "UNIQUE" },
+							{ "value": "FOREIGN" }
+						]
+					}
+				},
+				"fields": {
+					"type": "varchar(255)",
+					"null": "NULL",
+					"view": {
+						"name": "fields",
+						"type": "json"
+					}
+				},
+				"references": {
+					"type": "varchar(255)",
+					"null": "NULL",
+					"view": {
+						"name": "references",
+						"type": "json"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"idx_key": {
+					"fields": ["key"]
+				},
+				"idx_entities_id": {
+					"fields": ["entities_id"]
+				},
+				"fk_keys_entities_id": {
+					"type": "FOREIGN",
+					"fields": ["entities_id"],
+					"references": {
+						"entity": "entities",
+						"fields": ["id"]
+					}
+				}
+			},
+			"relations": [
+				{
+					"entity": "entities",
+					"key": "id",
+					"field": "entities_id"
+				}
+			]
+		}
+	]
+}

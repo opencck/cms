@@ -1,0 +1,217 @@
+{
+	"name": "test",
+	"description": "Test developing component",
+	"label": "Test component",
+	"icon": "mdi-test-tube",
+	"version": "1.0.0",
+	"settings": [],
+	"orm": [
+		{
+			"name": "items",
+			"description": "items",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "name",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"label": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "label",
+						"description": "",
+						"type": "text"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				}
+			}
+		},
+		{
+			"name": "options",
+			"description": "options of entities",
+			"options": {
+				"id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"auto_increment": true,
+					"view": {
+						"name": "ID",
+						"description": "",
+						"type": "hidden"
+					}
+				},
+				"items_id": {
+					"type": "int(11) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"name": "entities_id",
+						"description": "Relation to entities",
+						"type": "list"
+					}
+				},
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "name",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"description": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "description",
+						"description": "",
+						"type": "text"
+					}
+				},
+				"field": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "field",
+						"description": "Name of field",
+						"type": "text"
+					}
+				},
+				"type": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "type",
+						"description": "Type of field",
+						"type": "text"
+					}
+				},
+				"null": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "null",
+						"description": "Allow null value",
+						"type": "text"
+					}
+				},
+				"default": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "default",
+						"description": "Default value of option",
+						"type": "text"
+					}
+				},
+				"auto_increment": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "auto_increment",
+						"description": "Auto increment principle",
+						"type": "text"
+					}
+				},
+				"view": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"default": "''",
+					"view": {
+						"name": "view",
+						"description": "View of data",
+						"type": "viewList"
+					}
+				}
+			},
+			"keys": {
+				"id": {
+					"type": "PRIMARY"
+				},
+				"idx_items_id": {
+					"fields": ["items_id"]
+				},
+				"fk_items_id": {
+					"type": "FOREIGN",
+					"fields": ["items_id"],
+					"references": {
+						"entity": "items",
+						"fields": ["id"]
+					}
+				},
+				"uni_field": {
+					"type": "UNIQUE",
+					"fields": ["items_id", "field"]
+				}
+			},
+			"relations": [
+				{
+					"entity": "items",
+					"key": "id",
+					"field": "items_id"
+				},
+				{
+					"multiple": {
+						"name": "options_items",
+						"description": "",
+						"options": {
+							"options_id": {
+								"type": "int(11) unsigned",
+								"null": "NOT NULL",
+								"view": {
+									"name": "Options ID",
+									"description": ""
+								}
+							},
+							"items_id": {
+								"type": "int(11) unsigned",
+								"null": "NOT NULL",
+								"view": {
+									"name": "Items ID",
+									"description": ""
+								}
+							}
+						},
+						"keys": {
+							"options_entities_id": {
+								"type": "PRIMARY",
+								"fields": ["options_id", "items_id"]
+							}
+						}
+					},
+					"entity": "options_items",
+					"key": "options_id",
+					"field": "id"
+				}
+			]
+		}
+	]
+}

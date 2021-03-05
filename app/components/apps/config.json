@@ -1,0 +1,64 @@
+{
+	"name": "apps",
+	"label": "Applications",
+	"icon": "mdi-cog-box",
+	"description": "Control of CMS components",
+	"version": "1.0.0",
+	"views": [
+		{
+			"name": "install",
+			"label": "Installation",
+			"icon": "mdi-arrange-bring-to-front",
+			"description": "Installation and updating of CMS applications",
+			"view": "install"
+		},
+		{
+			"name": "settings",
+			"label": "Settings",
+			"icon": "mdi-cog",
+			"description": "Applications settings",
+			"view": "settings"
+		}
+	],
+	"settings": [{ "type": "text", "name": "sitename", "default": "" }],
+	"orm": [
+		{
+			"root": true,
+			"name": "apps",
+			"options": {
+				"name": {
+					"type": "varchar(255)",
+					"null": "NOT NULL",
+					"view": {
+						"name": "name",
+						"description": "Application name",
+						"type": "text"
+					}
+				},
+				"config": {
+					"type": "text",
+					"null": "NULL",
+					"default": "NULL",
+					"view": {
+						"name": "name",
+						"description": "Application config",
+						"type": "json"
+					}
+				},
+				"ordering": {
+					"type": "smallint(8) unsigned",
+					"null": "NOT NULL",
+					"default": "0",
+					"view": {
+						"type": "hidden"
+					}
+				}
+			},
+			"keys": {
+				"name": {
+					"type": "PRIMARY"
+				}
+			}
+		}
+	]
+}
