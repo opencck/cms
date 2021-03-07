@@ -30,11 +30,7 @@ RUN apk add --update --no-cache zlib-dev libzip-dev zip \
 RUN docker-php-ext-install mysqli \
 	&& docker-php-ext-enable mysqli
 
-# xDebug
-RUN pecl install xdebug-3.0.3 \
-	&& docker-php-ext-enable xdebug
-
-ADD docker-php-enable-jit.ini /usr/local/etc/php/conf.d/docker-php-enable-jit.ini
+ADD docker-php-enable-jit.production.ini /usr/local/etc/php/conf.d/docker-php-enable-jit.ini
 
 WORKDIR /app
 
