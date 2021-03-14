@@ -30,6 +30,10 @@
 			]
 		}
 	},
+	"suggest": {
+		"ext-memcached": "*",
+		"ext-redis": "*"
+	},
 	"autoload-dev": {
 		"psr-4": {
 			"APP\\": "tests/APP"

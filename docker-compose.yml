@@ -1,11 +1,11 @@
 version: '3.7'
 services:
   api:
-    build:
-      context: ./Dockerfile.production
     restart: always
+    build:
+      context: .
     ports:
       - 5000:5000
     volumes:
-      - .:/app
-    command: 'php -S 0.0.0.0:5000 -t /app/public'
+      - .:/var/www
+    command: 'php -S 0.0.0.0:5000 -t /var/www/public'

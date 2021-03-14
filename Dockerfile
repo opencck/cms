@@ -34,8 +34,20 @@ RUN docker-php-ext-install mysqli \
 RUN pecl install xdebug-3.0.3 \
 	&& docker-php-ext-enable xdebug
 
-ADD docker-php-enable-jit.ini /usr/local/etc/php/conf.d/docker-php-enable-jit.ini
+# memcached
+ENV MEMCACHED_DEPS zlib-dev libmemcached-dev
+RUN apk add --no-cache --update libmemcached-dev \
+	&& mkdir -p /usr/src/php/php-src-master/ext/memcached \
+	&& curl -fsSL https://pecl.php.net/get/memcached | tar xvz -C "/usr/src/php/php-src-master/ext/memcached" --strip 1 \
+	&& docker-php-ext-install memcached
 
-WORKDIR /app
+# redis
+RUN mkdir -p /usr/src/php/php-src-master/ext/redis \
+	&& curl -fsSL https://pecl.php.net/get/redis | tar xvz -C "/usr/src/php/php-src-master/ext/redis" --strip 1 \
+	&& docker-php-ext-install redis
 
-COPY . /app
+ADD .docker/php/docker-php-enable-jit.ini /usr/local/etc/php/conf.d/docker-php-enable-jit.ini
+ADD .docker/php/docker-php-ext-redis.ini /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
+
+# Set working directory
+WORKDIR /var/www

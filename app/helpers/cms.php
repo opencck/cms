@@ -81,7 +81,6 @@ class CMSHelper {
 					if (is_array($item)) {
 						$item = (object) $item;
 					}
-					//if (!isset($item->{$property})) dbg(['bindKeys', $object]);
 					$items[$item->{$property}] = $item;
 				}
 
