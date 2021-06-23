@@ -34,8 +34,10 @@ class AppsTest extends AppTestCase {
 	 */
 	public function testApplicationsChecking() {
 		$apps = $this->execute('apps.check', [], null, 'admin');
-		foreach ($apps as $app) {
-			$this->assertIsArray($app->migrations, 'migrations error in application: ' . $app->name);
+		if (is_iterable($apps)) {
+			foreach ($apps as $app) {
+				$this->assertIsArray($app->migrations, 'migrations error in application: ' . $app->name);
+			};
 		}
 	}
 

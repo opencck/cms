@@ -144,9 +144,7 @@ class CMSModel extends Model {
 		$this->computeEntityRelations($entity, $groups, $query);
 		//dbg($query->getQuery()->getSQL(), true);
 		//dbg($this->group($query->fetch()->getValues(), !is_null($groups) ? $groups : [], $entity->name));
-		$v = $query->fetch()->getValues();
-		$t = $this->group($v, !is_null($groups) ? $groups : [], $entity->name);
-		return $t;
+		return $this->group($query->fetch()->getValues(), !is_null($groups) ? $groups : [], $entity->name);
 	}
 
 	/**
