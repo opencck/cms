@@ -1,159 +1,159 @@
 {
-	"name": "users",
-	"description": "Users component",
-	"label": "Users",
-	"icon": "mdi-account-box",
-	"version": "1.0.0",
-	"settings": [],
-	"orm": [
-		{
-			"root": true,
-			"name": "users",
-			"options": {
-				"id": {
-					"type": "int(11) unsigned",
-					"null": "NOT NULL",
-					"auto_increment": true,
-					"view": {
-						"name": "ID",
-						"description": ""
-					}
-				},
-				"state": {
-					"type": "tinyint(4) unsigned",
-					"null": "NOT NULL",
-					"default": "0",
-					"view": {
-						"name": "state",
-						"description": ""
-					}
-				},
-				"username": {
-					"type": "varchar(255)",
-					"null": "NOT NULL",
-					"view": {
-						"name": "username",
-						"description": "",
-						"type": "text"
-					}
-				},
-				"password": {
-					"type": "varchar(255)",
-					"null": "NOT NULL",
-					"view": {
-						"name": "password",
-						"description": "",
-						"type": "password"
-					}
-				},
-				"sold": {
-					"type": "varchar(16)",
-					"null": "NOT NULL",
-					"view": {
-						"name": "sold",
-						"description": "",
-						"type": "text"
-					}
-				},
-				"email": {
-					"type": "varchar(255)",
-					"null": "NOT NULL",
-					"view": {
-						"name": "email",
-						"description": "",
-						"type": "text"
-					}
-				},
-				"role": {
-					"type": "enum('user', 'admin')",
-					"null": "NOT NULL",
-					"default": "user",
-					"view": {
-						"name": "type",
-						"description": "Type of key",
-						"type": "list",
-						"options": [{ "value": "user" }, { "value": "admin" }]
-					}
-				},
-				"date_create": {
-					"type": "timestamp",
-					"null": "NOT NULL",
-					"default": "CURRENT_TIMESTAMP",
-					"view": {
-						"name": "date_create",
-						"description": "Date of creation",
-						"type": "datetime"
-					}
-				}
-			},
-			"keys": {
-				"id": {
-					"type": "PRIMARY"
-				},
-				"idx_role": {
-					"fields": ["role"]
-				},
-				"idx_state": {
-					"fields": ["state"]
-				}
-			}
-		},
-		{
-			"root": true,
-			"name": "sessions",
-			"options": {
-				"id": {
-					"type": "varchar(32)",
-					"null": "NOT NULL",
-					"view": {
-						"name": "ID",
-						"description": ""
-					}
-				},
-				"location": {
-					"type": "enum('site', 'api', 'admin')",
-					"null": "NOT NULL",
-					"default": "site",
-					"view": {
-						"name": "location",
-						"description": "Location",
-						"type": "list",
-						"options": [{ "value": "site" }, { "value": "admin" }]
-					}
-				},
-				"access": {
-					"type": "int unsigned",
-					"null": "NOT NULL",
-					"view": {
-						"name": "access",
-						"description": "",
-						"type": "timestamp"
-					}
-				},
-				"users_id": {
-					"type": "int(11) unsigned",
-					"null": "NOT NULL",
-					"default": "0",
-					"view": {
-						"name": "users_id",
-						"description": "",
-						"type": "users"
-					}
-				},
-				"data": {
-					"type": "TEXT",
-					"null": "NULL",
-					"view": {
-						"name": "data"
-					}
-				}
-			},
-			"keys": {
-				"id": {
-					"type": "PRIMARY"
-				}
-			},
-			"relations": [{ "entity": "users", "key": "id", "field": "users_id" }]
-		}
-	]
+    "name": "users",
+    "description": "Users component",
+    "label": "Users",
+    "icon": "mdi-account-box",
+    "version": "1.0.0",
+    "settings": [],
+    "orm": [
+        {
+            "root": true,
+            "name": "users",
+            "options": {
+                "id": {
+                    "type": "int(11) unsigned",
+                    "null": "NOT NULL",
+                    "auto_increment": true,
+                    "view": {
+                        "name": "ID",
+                        "description": ""
+                    }
+                },
+                "state": {
+                    "type": "tinyint(4) unsigned",
+                    "null": "NOT NULL",
+                    "default": "0",
+                    "view": {
+                        "name": "state",
+                        "description": ""
+                    }
+                },
+                "username": {
+                    "type": "varchar(255)",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "username",
+                        "description": "",
+                        "type": "text"
+                    }
+                },
+                "password": {
+                    "type": "varchar(255)",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "password",
+                        "description": "",
+                        "type": "password"
+                    }
+                },
+                "sold": {
+                    "type": "varchar(16)",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "sold",
+                        "description": "",
+                        "type": "text"
+                    }
+                },
+                "email": {
+                    "type": "varchar(255)",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "email",
+                        "description": "",
+                        "type": "text"
+                    }
+                },
+                "role": {
+                    "type": "enum('user', 'admin')",
+                    "null": "NOT NULL",
+                    "default": "user",
+                    "view": {
+                        "name": "type",
+                        "description": "Type of key",
+                        "type": "list",
+                        "options": [{ "value": "user" }, { "value": "admin" }]
+                    }
+                },
+                "date_create": {
+                    "type": "timestamp",
+                    "null": "NOT NULL",
+                    "default": "CURRENT_TIMESTAMP",
+                    "view": {
+                        "name": "date_create",
+                        "description": "Date of creation",
+                        "type": "datetime"
+                    }
+                }
+            },
+            "keys": {
+                "id": {
+                    "type": "PRIMARY"
+                },
+                "idx_role": {
+                    "fields": ["role"]
+                },
+                "idx_state": {
+                    "fields": ["state"]
+                }
+            }
+        },
+        {
+            "root": true,
+            "name": "sessions",
+            "options": {
+                "id": {
+                    "type": "varchar(32)",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "ID",
+                        "description": ""
+                    }
+                },
+                "location": {
+                    "type": "enum('site', 'api', 'admin')",
+                    "null": "NOT NULL",
+                    "default": "site",
+                    "view": {
+                        "name": "location",
+                        "description": "Location",
+                        "type": "list",
+                        "options": [{ "value": "site" }, { "value": "admin" }]
+                    }
+                },
+                "access": {
+                    "type": "int unsigned",
+                    "null": "NOT NULL",
+                    "view": {
+                        "name": "access",
+                        "description": "",
+                        "type": "timestamp"
+                    }
+                },
+                "users_id": {
+                    "type": "int(11) unsigned",
+                    "null": "NOT NULL",
+                    "default": "0",
+                    "view": {
+                        "name": "users_id",
+                        "description": "",
+                        "type": "users"
+                    }
+                },
+                "data": {
+                    "type": "TEXT",
+                    "null": "NULL",
+                    "view": {
+                        "name": "data"
+                    }
+                }
+            },
+            "keys": {
+                "id": {
+                    "type": "PRIMARY"
+                }
+            },
+            "relations": [{ "entity": "users", "key": "id", "field": "users_id" }]
+        }
+    ]
 }

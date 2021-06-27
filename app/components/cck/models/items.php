@@ -8,22 +8,22 @@ use APP\Models\CMSModel;
  * @package APP\Components\CCK\Models
  */
 class ItemsModel extends CMSModel {
-	/**
-	 * Table name
-	 * @var string
-	 */
-	public $table = 'units';
+    /**
+     * Table name
+     * @var string
+     */
+    public $table = 'units';
 
-	/**
-	 * Fields of table
-	 * @var string[]
-	 */
-	static $fields = [
-		'id' => 'integer',
-		'courses_id' => 'integer',
-		'state' => 'integer',
-		'ordering' => 'integer',
-		'name' => 'string',
-		'pseudoname' => 'string',
-	];
+    /**
+     * Fields of table
+     * @var string[]
+     */
+    static $fields = [
+        'id' => 'integer',
+        'courses_id' => 'integer',
+        'state' => 'integer',
+        'ordering' => 'integer',
+        'name' => 'string',
+        'pseudoname' => 'string',
+    ];
 }

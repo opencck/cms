@@ -11,33 +11,33 @@ use Doctrine\DBAL\DBALException;
  * @package APP\Components\CCK\Controllers\Items
  */
 class selectController extends CMSController {
-	/**
-	 * Name of application
-	 * @var string
-	 */
-	public $name = 'cck_app';
+    /**
+     * Name of application
+     * @var string
+     */
+    public $name = 'cck_app';
 
-	/**
-	 * @param string $name
-	 * @param array<array-key, Input> $arguments
-	 * @return array
-	 * @throws DBALException
-	 */
-	public function __call($name, $arguments) {
-		$input = $arguments[0];
-		$this->name = $input->get('app', $this->name, 'string');
+    /**
+     * @param string $name
+     * @param array<array-key, Input> $arguments
+     * @return array
+     * @throws DBALException
+     */
+    public function __call($name, $arguments) {
+        $input = $arguments[0];
+        $this->name = $input->get('app', $this->name, 'string');
 
-		/** @var CMSModel $model */
-		$model = $this->getModel('cms', $this->name, true);
-		return $model
-			->selectItems(
-				$name,
-				$input->get('select', [], 'array'),
-				$input->get('where', [], 'array'),
-				$input->get('order', [], 'array'),
-				$input->get('group', [], 'array'),
-				$input->get('limit', [], 'array')
-			)
-			->getValues();
-	}
+        /** @var CMSModel $model */
+        $model = $this->getModel('cms', $this->name, true);
+        return $model
+            ->selectItems(
+                $name,
+                $input->get('select', [], 'array'),
+                $input->get('where', [], 'array'),
+                $input->get('order', [], 'array'),
+                $input->get('group', [], 'array'),
+                $input->get('limit', [], 'array')
+            )
+            ->getValues();
+    }
 }

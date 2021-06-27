@@ -8,5 +8,5 @@ use APP\Models\CMSModel;
  * @package APP
  */
 class UsersModel extends CMSModel {
-	public $table = 'users';
+    public $table = 'users';
 }

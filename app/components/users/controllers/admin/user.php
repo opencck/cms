@@ -12,14 +12,14 @@ use Exception;
  * @package APP\Components\Users\Controllers\Admin
  */
 class UserController extends AdminController {
-	/**
-	 * User logout
-	 * @throws DBALException
-	 * @throws Exception
-	 */
-	public function logout() {
-		$session = Session::getInstance();
-		$session->setUser(null);
-		$this->addMutation('user/set', new User());
-	}
+    /**
+     * User logout
+     * @throws DBALException
+     * @throws Exception
+     */
+    public function logout() {
+        $session = Session::getInstance();
+        $session->setUser(null);
+        $this->addMutation('user/set', new User());
+    }
 }

@@ -1,13 +1,13 @@
 {
-	"name": "opencck-cms",
-	"version": "1.0.0",
-	"description": "Content management system with content construction",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "Krupkin Sergey <rekrytkw@gmail.com>",
-	"devDependencies": {
-		"@prettier/plugin-php": "^0.14.0",
-		"prettier": "^2.0.4"
-	}
+    "name": "opencck-cms",
+    "version": "1.0.0",
+    "description": "Content management system with content construction",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Krupkin Sergey <rekrytkw@gmail.com>",
+    "devDependencies": {
+        "@prettier/plugin-php": "^0.14.0",
+        "prettier": "^2.0.4"
+    }
 }
